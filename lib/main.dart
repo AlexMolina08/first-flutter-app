@@ -13,8 +13,6 @@ class MyApp extends StatelessWidget { //Heredar de SatelessWidget hace a la app 
   @override
   Widget build(BuildContext context){
 
-    final dosPalabras = WordPair.random();
-
     return MaterialApp(
       title: 'Bienvenido a Flutter',
       home: Scaffold(
@@ -22,12 +20,31 @@ class MyApp extends StatelessWidget { //Heredar de SatelessWidget hace a la app 
           title: Text('Bienvenido a Flutter')
         ),
         body: Center(
-          child: Text(dosPalabras.asPascalCase),
+          child: PalabrasRandom(),
         ),
       ),
     );
   }
+}
 
 
+//Creamos el widget Stateful (con estado)
+//Lo único que hace es crear una instancia de su estado
+class PalabrasRandom extends StatefulWidget{
 
+  @override
+  PalabrasRandomState createState() => PalabrasRandomState();
+
+}
+
+//Creamos un estado para el StatefulWidget
+//Hereda de la clase State especializada para el uso de PalabrasRandom(Buena práctica)
+//Sostiene el funcionamiento del widget PalabrasRandom
+//Devuelve una combinación de dos palabras
+class PalabrasRandomState extends State<PalabrasRandom> {
+
+  Widget build(BuildContext context){
+    final dosPalabras = WordPair.random();
+    return Text(dosPalabras.asPascalCase);
+  }
 }
