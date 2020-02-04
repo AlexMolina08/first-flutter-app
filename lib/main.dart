@@ -77,6 +77,7 @@ class PalabrasRandomState extends State<PalabrasRandom> {
   }
 
   Widget _buildRow(WordPair pair){
+
     return ListTile(
       title: Text(
         pair.asPascalCase,
@@ -86,7 +87,11 @@ class PalabrasRandomState extends State<PalabrasRandom> {
   }
 
   Widget build(BuildContext context){
-    final dosPalabras = WordPair.random();
-    return Text(dosPalabras.asPascalCase);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Generador de palabras aleatorias'),
+      ),
+      body: _buildSuggestions()
+    );
   }
 }
