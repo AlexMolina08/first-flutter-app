@@ -22,6 +22,9 @@ class MyApp extends StatelessWidget { //Heredar de SatelessWidget hace a la app 
         body: Center(
           child: PalabrasRandom(),
         ),
+        floatingActionButton: FloatingActionButton(
+            child: Text("Pulsame")
+        ),
       ),
     );
   }
@@ -44,8 +47,8 @@ class PalabrasRandom extends StatefulWidget{
 class PalabrasRandomState extends State<PalabrasRandom> {
 
   final _suggestions = <WordPair>[]; //Creamos una lista para almacenar las palabras creadas
+  final Set<WordPair> _favoritas = Set<WordPair>(); //Creamos un conjunto para las palabras favoritas
   final _fontSize = const TextStyle(fontSize: 18.0); //Tamaño de la fuente
-
 
   //Devuelve el ListView
   
@@ -74,15 +77,36 @@ class PalabrasRandomState extends State<PalabrasRandom> {
         return _buildRow(_suggestions[index]);
 
       });
+
+
   }
 
   Widget _buildRow(WordPair pair){
+
+    final bool yaGuardada =_favoritas.contains(pair); //Comprobamos si la palabra ya está en el conjunto
 
     return ListTile(
       title: Text(
         pair.asPascalCase,
         style: _fontSize
       ),
+
+      trailing: Icon(
+        yaGuardada ? Icons.favorite : Icons.favorite_border,
+        color: yaGuardada ? Colors.red : null,
+      ),
+      onTap: (){ //cuando se pulsa el ListTile , se llama a setState() para notificar
+                //que el estado va a cambiar
+        setState((){
+          if(!yaGuardada)
+            _favoritas.add(pair);
+          else
+            _favoritas.remove(pair);
+        }
+
+        );
+    }
+
     );
   }
 
