@@ -14,18 +14,12 @@ class MyApp extends StatelessWidget { //Heredar de SatelessWidget hace a la app 
   Widget build(BuildContext context){
 
     return MaterialApp(
-      title: 'Bienvenido a Flutter',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Bienvenido a Flutter')
-        ),
-        body: Center(
-          child: PalabrasRandom(),
-        ),
-        floatingActionButton: FloatingActionButton(
-            child: Text("Pulsame")
-        ),
+      title:"Generador de Palabras Aleatorias",
+      theme: ThemeData(
+        primaryColor: Colors.white,
+          accentColor: Colors.red,
       ),
+      home: PalabrasRandom()
     );
   }
 }
@@ -93,7 +87,7 @@ class PalabrasRandomState extends State<PalabrasRandom> {
 
       trailing: Icon(
         yaGuardada ? Icons.favorite : Icons.favorite_border,
-        color: yaGuardada ? Colors.red : null,
+        color: yaGuardada ? Colors.redAccent : null,
       ),
       onTap: (){ //cuando se pulsa el ListTile , se llama a setState() para notificar
                 //que el estado va a cambiar
