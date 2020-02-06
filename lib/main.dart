@@ -110,10 +110,18 @@ class PalabrasRandomState extends State<PalabrasRandom> {
     );
   }
 
+  void _pushGuardada(){
+
+  }
+
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: Text('Generador de palabras aleatorias'),
+        actions: <Widget>[ //Creamos un Array de Widgets con un solo elemento
+          IconButton(icon: Icon(Icons.list),
+              onPressed: _pushGuardada),
+        ],
       ),
       body: _buildSuggestions()
     );
