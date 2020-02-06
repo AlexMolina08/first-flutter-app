@@ -110,7 +110,45 @@ class PalabrasRandomState extends State<PalabrasRandom> {
     );
   }
 
-  void _pushGuardada(){
+  //Este método mete en la pila del Navegador una nueva ruta
+  void _pushFavoritas(){
+
+
+    //Navigator añade directamente el boton pop
+    Navigator.of(context).push(
+
+      MaterialPageRoute<void>(
+        builder: (BuildContext context){
+
+          final Iterable<ListTile> filas = _favoritas.map(
+              (WordPair pair){
+                return ListTile(
+                  title: Text(
+                    pair.asPascalCase,
+                    style: _fontSize
+                  )
+                );
+              },
+          );
+
+          //Añadimos espacios entre cada fila
+          final List<Widget> divided = ListTile.divideTiles(
+            context: context,
+            tiles:filas
+          ).toList();
+
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Favoritas'),
+          ),
+           body: ListView(
+               children:divided)
+          );
+        }
+      )
+
+    );
 
   }
 
@@ -120,7 +158,7 @@ class PalabrasRandomState extends State<PalabrasRandom> {
         title: Text('Generador de palabras aleatorias'),
         actions: <Widget>[ //Creamos un Array de Widgets con un solo elemento
           IconButton(icon: Icon(Icons.list),
-              onPressed: _pushGuardada),
+              onPressed: _pushFavoritas),
         ],
       ),
       body: _buildSuggestions()
